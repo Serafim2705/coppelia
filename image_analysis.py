@@ -11,7 +11,7 @@ import keras
 from keras.preprocessing import image
 
 data1=['apple','banana']
-model=keras.models.load_model("C:\\Users\\seraf\\PycharmProjects\\keras\\fruits_banana_apple_3.h5", compile = True)
+model=keras.models.load_model("C:\\Users\\seraf\\keras\\fruits_banana_apple_3.h5", compile = True)
 
 sim.simxFinish(-1)
 
