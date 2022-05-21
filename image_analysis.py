@@ -1,10 +1,5 @@
 import sim
 import time
-
-from PIL import Image as I
-import array
-
-import cv2, numpy
 import array
 from PIL import Image
 import math
@@ -26,8 +21,6 @@ if clientID!=-1:
   print('Connected to remote API server')
 
   # get vision sensor objects
-  res, v0 = sim.simxGetObjectHandle(clientID, 'v0', sim.simx_opmode_oneshot_wait)
-  res, v1 = sim.simxGetObjectHandle(clientID, 'v1', sim.simx_opmode_oneshot_wait)
   res1,visionSensorHandle1=sim.simxGetObjectHandle(clientID,'Vision_sensor2',sim.simx_opmode_oneshot_wait)
 
   err, resolution, image0 = sim.simxGetVisionSensorImage(clientID, v0, 0, sim.simx_opmode_streaming)
@@ -50,16 +43,13 @@ if clientID!=-1:
 
       new_image=Image.fromarray(img2)
       new_image1=new_image.rotate(180)
-      #new_image1=new_image.transpose(Image.FLIP_LEFT_RIGHT)
       new_image1=new_image.transpose(Image.FLIP_TOP_BOTTOM)
       #new_image1.save(F"D:\\test\\test{count}.jpg")
       count+=1
-
       x=image.img_to_array(new_image1)
 
       if(x.max()>maxx):
         maxx=x.max()
-
       x=numpy.expand_dims(x,axis=0)
 
       pred=model.predict(x)
